@@ -1,6 +1,9 @@
-var myApp = angular.module('myApp', ['paneMod']);
+var myApp = angular.module('myApp', ['paneMod', 'recipeService']);
 
-myApp.controller('myCtrl', ['$scope', function($scope){
+myApp.controller('myCtrl', ['$scope', 'recipe', function($scope, recipe){
+	var result = recipe.getChefs();
+	var obj = angular.fromJson(result);
+	
 	$scope.paneDetails = new Object();
 	$scope.paneDetails.header = 'myApp Pane Header';
 	$scope.paneDetails.body = 'myApp Body';
@@ -10,10 +13,11 @@ myApp.controller('myCtrl', ['$scope', function($scope){
 	$scope.secondPane.body = 'Second Body';
 
 	$scope.paneList = new Array();
-	for(var i = 0; i < 10; i++){
+	
+	obj.chefs.forEach(function (element, index) {
 		var newDetail = new Object();
-		newDetail.header = "Header " + i;
-		newDetail.body = "Body " + i;
+		newDetail.header = element.last + ', ' + element.first;
+		newDetail.body = "Age: " + element.age;
 		$scope.paneList.push(newDetail);
-	}
+	});
 }]);

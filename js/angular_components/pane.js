@@ -10,7 +10,6 @@ paneMod.directive('bsPane', function(){
 		},
 		templateUrl: 'angular_templates/pane.html',
 		link: function(scope, element, attrs){
-			console.log('LINK!');
 			if(!scope.color){
 				scope.color = 'panel-default';
 			}
